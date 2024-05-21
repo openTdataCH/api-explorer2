@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>API Explorer OJP Switzerland</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>API-Explorer OJP v1.0 Switzerland</h1>
+  Matthias Günter, matthias.guenter@sbb.ch, Copyright 2024 MIT license: https://de.wikipedia.org/wiki/MIT-Lizenz
+  
+  <h2>1. Select template and adapt</h2>
+  <label for="dataSelect">Select template:</label>
+  <select id="dataSelect"></select>
+  <br>
+  <button id="generateButton">Populate request field</button>
+  <br>
+   <label for="requestTextArea">OJP Request:</label>
+  <textarea id="requestTextArea"></textarea> 
+  <br>
+  <h2>2. Ask the server</h2>
+  <button id="sendButton">Ask sever</button>
+  <br>
+  <label for="responseTextArea">OJP Response:</label>
+  <textarea id="responseTextArea" readonly></textarea>
+  <br>
+  <h2>3. Copy the result</h2>
+    <button id="copyButton">Copy to Clipboard</button>
+  <script>
+
+function prettifyXML(xmlString) {
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(xmlString, 'application/xml');
+
+  const indentString = '  ';
+
+  function formatNode(node, level) {
+    let result = '';
+
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent.trim();
+      if (text) {
+        result += text;
+      }
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      result += '\n' + indentString.repeat(level);
+      result += `<${node.nodeName}`;
+
+      Array.from(node.attributes).forEach((attr) => {
+        result += ` ${attr.name}="${attr.value}"`;
+      });
+
+      if (node.childNodes.length === 0) {
+        result += '/>';
+      } else {
+        result += '>';
+
+        Array.from(node.childNodes).forEach((childNode) => {
+          result += formatNode(childNode, level + 1);
+        });
+
+        //result += '\n' + indentString.repeat(level);
+        result += `</${node.nodeName}>`;
+      }
+    }
+	console.log(result);
+    return result;
+
+  }
+
+  return formatNode(xmlDoc.firstChild, 0).trim();
+}
+    // Funktion zum Generieren der HTTP-POST-Anfrage mit API-Schlüssel
+    function generateRequest() {
+      const requestTextArea = document.getElementById('requestTextArea');
+      const dataSelect = document.getElementById('dataSelect');
+      const selected = unescapeXmlContent(jsonData[dataSelect.value].content);
+	  console.log(selected)
+      requestTextArea.value=prettifyXML(selected); //prettify
+    }
+
+    // Funktion zum Senden des HTTP-POST-Requests
+    function sendRequest() {
+      const requestTextArea = document.getElementById('requestTextArea');
+      const request = requestTextArea.value;
+
+      fetch('https://api.opentransportdata.swiss/ojp2020/', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/xml',
+		  'Authorization': 'Bearer 57c5dbbbf1fe4d000100001842c323fa9ff44fbba0b9b925f0c052d1'
+        },
+        body: request
+      })
+      .then(response => response.text())
+      .then(data => {
+        const responseTextArea = document.getElementById('responseTextArea');
+        //datav=vkbeautify.xml(data.value); TODO
+		responseTextArea.value = prettifyXML(data);
+      })
+      .catch(error => {
+        console.error('Fehler beim Senden der Anfrage:', error);
+      });
+    }
+
+    // Füge den Klick-Event-Listener zum Generieren-Button hinzu
+    const generateButton = document.getElementById('generateButton');
+    generateButton.addEventListener('click', generateRequest);
+
+    // Füge den Klick-Event-Listener zum Senden-Button hinzu
+    const sendButton = document.getElementById('sendButton');
+    sendButton.addEventListener('click', sendRequest);
+	
+    function copyToClipboard() {
+      const textArea = document.getElementById('responseTextArea');
+      const textToCopy = textArea.value;
+
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          alert('Text copied to clipboard!');
+        })
+        .catch((error) => {
+          console.error('Failed to copy text to clipboard:', error);
+        });
+    }
+
+    // Add click event listener to the copy button
+    const copyButton = document.getElementById('copyButton');
+    copyButton.addEventListener('click', copyToClipboard);	
+
+	// Function to load data from the JSON file
+
+	const jsonData=[
+{
+"title":"SER - Bern",
+"content":'<![CDATA[<OJP xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.siri.org.uk/siri" version="1.0" xmlns:ojp="http://www.vdv.de/ojp" xsi:schemaLocation="http://www.siri.org.uk/siri ../ojp-xsd-v1.0/OJP.xsd"><OJPRequest><ServiceRequest><RequestTimestamp>2024-05-14T14:18:47.924Z</RequestTimestamp><RequestorRef>API-Explorer</RequestorRef><ojp:OJPStopEventRequest><RequestTimestamp>2024-05-14T14:18:47.924Z</RequestTimestamp><ojp:Location><ojp:PlaceRef><StopPlaceRef>8507000</StopPlaceRef><ojp:LocationName><ojp:Text>Bern</ojp:Text></ojp:LocationName></ojp:PlaceRef></ojp:Location><ojp:Params><ojp:NumberOfResults>1</ojp:NumberOfResults><ojp:StopEventType>departure</ojp:StopEventType><ojp:IncludeRealtimeData>true</ojp:IncludeRealtimeData></ojp:Params></ojp:OJPStopEventRequest></ServiceRequest></OJPRequest></OJP>]]>'
+},
+{
+"title":"TR - Bern-Zürich, via Basel",
+"content":'<![CDATA[<?xml version="1.0" encoding="utf-8"?><OJP xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.siri.org.uk/siri" version="1.0" xmlns:ojp="http://www.vdv.de/ojp" xsi:schemaLocation="http://www.siri.org.uk/siri ../ojp-xsd-v1.0/OJP.xsd"><OJPRequest><ServiceRequest><RequestTimestamp>2024-05-21T12:06:37.297Z</RequestTimestamp><RequestorRef>API-Explorer</RequestorRef><ojp:OJPTripRequest><RequestTimestamp>2024-05-21T12:06:37.297Z</RequestTimestamp><ojp:Origin><ojp:PlaceRef><ojp:StopPlaceRef>8507000</ojp:StopPlaceRef><ojp:LocationName><ojp:Text>Bern</ojp:Text></ojp:LocationName></ojp:PlaceRef><!--<ojp:DepArrTime>2024-05-21T14:06:02</ojp:DepArrTime>--><ojp:IndividualTransportOptions><ojp:Mode>walk</ojp:Mode><ojp:MaxDistance>200</ojp:MaxDistance></ojp:IndividualTransportOptions></ojp:Origin><ojp:Destination><ojp:PlaceRef><ojp:StopPlaceRef>8503000</ojp:StopPlaceRef><ojp:LocationName><ojp:Text>Zürich</ojp:Text></ojp:LocationName></ojp:PlaceRef></ojp:Destination><ojp:Params><ojp:IncludeTrackSections>true</ojp:IncludeTrackSections><ojp:IncludeLegProjection>true</ojp:IncludeLegProjection><ojp:IncludeTurnDescription>true</ojp:IncludeTurnDescription><ojp:IncludeIntermediateStops>true</ojp:IncludeIntermediateStops></ojp:Params></ojp:OJPTripRequest></ServiceRequest></OJPRequest></OJP>]]>'
+}
+]
+
+
+
+function loadData(jsonData) {
+	//TODO more data
+	console.log("loadData");
+	console.log(jsonData)
+    populateSelect(jsonData);
+	}
+    
+// Function to populate the select element with data
+function populateSelect(jsonData) {
+	console.log("populateSelect");
+	console.log(jsonData)
+	
+  const dataSelect = document.getElementById('dataSelect');
+  // Clear existing options
+  dataSelect.innerHTML = '';
+  // Add options based on the JSON data
+  for (let item in jsonData) {
+    const option = document.createElement('option');
+    option.value = item;
+    option.textContent = jsonData[item].title;
+	dataSelect.appendChild(option);
+  }
+}
+
+// Call the loadData function to load the data on page load
+loadData(jsonData);
+
+
+// Function to unescape XML content within JSON
+function unescapeXmlContent(content) {
+  const cdataStart = "<![CDATA[";
+  const cdataEnd = "]]>";
+
+  // Check if the content is wrapped in CDATA section
+  if (content.startsWith(cdataStart) && content.endsWith(cdataEnd)) {
+    // Remove the CDATA section
+    const unescapedContent = content.slice(cdataStart.length, -cdataEnd.length);
+    // Replace newline characters with actual line breaks
+    const unescapedMultilineContent = unescapedContent.replace(/\\n/g, '\n');
+    return unescapedMultilineContent;
+  }
+
+  return content;
+}
+
+  </script>
+</body>
+</html>
