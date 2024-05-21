@@ -1,0 +1,68 @@
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Set the page background color */
+body {
+  background-color: #f5f5f5;
+}
+
+/* Set the font and text color */
+body, h1, h2, h3, h4, h5, h6, p, a {
+  font-family: Arial, sans-serif;
+  color: #333333;
+}
+
+/* Set the maximum width and center the page content */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Style the header */
+header {
+  background-color: #003366;
+  padding: 20px;
+  color: #ffffff;
+}
+
+/* Style the header links */
+header a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+/* Style the main content area */
+main {
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+/* Style the footer */
+footer {
+  background-color: #003366;
+  padding: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Style the footer links */
+footer a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    textarea {
+      width: 500px;
+      height: 200px;
+    }
+  
