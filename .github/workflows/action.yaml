@@ -1,0 +1,68 @@
+name: OpenAPI GitHub Pages Documentation
+description: Convert OpenAPI specifications to API documentation and publish to GitHub Pages
+branding:
+  icon: 'upload-cloud'
+  color: 'white'
+
+# GitHub Action inputs
+inputs:
+  api-configs:
+    description: JSON string configuring each OpenAPI spec to document
+    required: true
+  api-docs-dir:
+    description: Parent directory to use for API docs
+    required: true
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout source package
+      uses: actions/checkout@v4
+      with:
+        # Fetch Git history from across all branches/tags,
+        # to enable fetching OpenAPI specs from multiple branches
+        fetch-depth: 0
+    - uses: actions/setup-java@v4
+      with:
+        distribution: corretto
+        java-version: 17
+    - name: Install pre-requisites
+      run: |
+        sudo npm install -g @redocly/cli
+        sudo snap install yq
+      shell: bash
+    - name: Fetch generate-docs.sh script
+      uses: actions/checkout@v4
+      with:
+        repository: msayson/openapi-github-pages-action
+        sparse-checkout: scripts
+        path: openapi-github-pages-scripts
+    - name: Generate ReDoc API docs
+      run: openapi-github-pages-scripts/scripts/generate-docs.sh
+      shell: bash
+      env:
+        # JSON string containing config for each OpenAPI spec to document
+        API_CONFIGS: ${{ inputs.api-configs }}
+        # Parent directory to use for generated API docs
+        API_DOCS_DIR: ${{ inputs.api-docs-dir }}
+        # Pass in calling repository name, eg. actions/checkout
+        GH_ACTION_REPOSITORY: ${{ github.action_repository || github.repository }}
+        # Required to pass permissions to fetch OpenAPI spec files from Git branches
+        GH_TOKEN: ${{ github.token }}
+        # Used to return to caller's repository directory
+        WORKSPACE_DIR: ${{ github.workspace }}
+    - name: Set up GitHub Pages
+      uses: actions/configure-pages@v5
+    - name: Upload API docs to GitHub Pages
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: ${{ inputs.api-docs-dir }}
+    - name: Deploy GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
