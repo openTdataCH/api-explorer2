@@ -6,6 +6,8 @@ info:
     This swagger introduces the list of provided services the Swiss OJP 1.0 and OJP 2.0 service. The interface follows the CEN standard interface OJP (Open API for distributed Journey Planning). For tests you need first to login with your key or this test key
     OJP 1.0:
           `57c5dbbbf1fe4d000100001842c323fa9ff44fbba0b9b925f0c052d1`.
+    
+    
     OJP 2.0:
           `eyJvcmciOiI2NDA2NTFhNTIyZmEwNTAwMDEyOWJiZTEiLCJpZCI6ImVhN2I2NTk4MTIxODQ4YmU4MmQyMzM1MzExODU1NmNhIiwiaCI6Im11cm11cjEyOCJ9`.
     
