@@ -245,24 +245,6 @@ paths:
                   description: "Get a correct key and apply it correctly."
                   value:
                     error: Authorization field missing
-"401":
-  description: Unauthorized
-  content:
-    application/json:
-      schema:
-        type: object
-        properties:
-          error:
-            type: string
-        required:
-          - error
-      examples:
-        example2:
-          summary: Wrong or no key provided
-          description: Get a correct key and apply it correctly.
-          value:
-            error: Authorization field missing
-
   /ojp2020:
     post:
       summary: "OJP 1.0 acccess"
