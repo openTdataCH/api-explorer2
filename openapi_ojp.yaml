@@ -247,6 +247,24 @@ paths:
                   description: "Get a correct key and apply it correctly."
                   value:
                     error: Authorization field missing
+
+        "403":
+          description: "Forbidden"
+          content:
+            application/json:
+              schema: 
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                  required:
+                    - error
+              examples:
+                example2:
+                  summary: "Wrong or no key provided"
+                  description: "Get a correct key and apply it correctly."
+                  value:
+                    error: Access to this API has been disallowed                  
   /ojp2020:
     post:
       summary: "OJP 1.0 acccess"
