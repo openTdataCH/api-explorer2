@@ -129,6 +129,35 @@ paths:
                   		</siri:ServiceRequest>
                   	</OJPRequest>
                    </OJP>             
+              exampleLIR5:
+                summary: "LIR - extended version"
+                description: "OJPLocationInformationtRequest extened"
+                value: |                   
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <OJP xmlns="http://www.vdv.de/ojp" xmlns:siri="http://www.siri.org.uk/siri" version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vdv.de/ojp ../../../../OJP4/OJP.xsd">
+                    	<OJPRequest>
+                    		<siri:ServiceRequest>
+                    			<siri:RequestTimestamp>2024-06-01T11:24:34.598Z</siri:RequestTimestamp>
+                    			<siri:RequestorRef>MENTZRegTest</siri:RequestorRef>
+                    			<OJPLocationInformationRequest>
+                    				<siri:RequestTimestamp>2024-06-01T11:24:34.598Z</siri:RequestTimestamp>
+                    				<siri:MessageIdentifier>LIR-1c</siri:MessageIdentifier>
+                    				<InitialInput>
+                    					<GeoPosition>
+                    						<siri:Longitude>8.55330</siri:Longitude>
+                    						<siri:Latitude>47.37609</siri:Latitude>
+                    					</GeoPosition>
+                    				</InitialInput>
+                    				<Restrictions>
+                    					<Type>stop</Type>
+                    					<NumberOfResults>10</NumberOfResults>
+                    					<IncludePtModes>true</IncludePtModes>
+                    					<IncludeOperators>true</IncludeOperators>
+                    				</Restrictions>
+                    			</OJPLocationInformationRequest>
+                    		</siri:ServiceRequest>
+                    	</OJPRequest>
+                    </OJP>
               exampleSER1:
                 summary: "SER - Simple"
                 description: "Simple OJPStopEventRequest for Bern"
@@ -165,6 +194,40 @@ paths:
                           </ServiceRequest>
                       </OJPRequest>
                   </OJP>
+              exampleSER3:
+                summary: "SER - complex"
+                description: "Complex OJPStopEventRequest"
+                value: |
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <OJP xmlns="http://www.vdv.de/ojp" xmlns:siri="http://www.siri.org.uk/siri" version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vdv.de/ojp ../../../../OJP4/OJP.xsd">
+                    	<OJPRequest>
+                    		<siri:ServiceRequest>
+                    			<siri:RequestTimestamp>2024-06-01T11:24:34.598Z</siri:RequestTimestamp>
+                    			<siri:RequestorRef>MENTZRegTest</siri:RequestorRef>
+                    			<OJPStopEventRequest>
+                    				<siri:RequestTimestamp>2024-06-01T11:24:34.598Z</siri:RequestTimestamp>
+                    				<siri:MessageIdentifier>SER</siri:MessageIdentifier>
+                    				<Location>
+                    					<PlaceRef>
+                    						<siri:StopPointRef>8530813</siri:StopPointRef>
+                    						<Name>
+                    							<Text>Zürich Kreuzplatz</Text>
+                    						</Name>
+                    					</PlaceRef>
+                    					<!-- <DepArrTime>2024-06-01T11:24:34.598Z</DepArrTime> -->
+                    				</Location>
+                    				<Params>
+                    					<NumberOfResults>5</NumberOfResults>
+                    					<StopEventType>departure</StopEventType>
+                    					<IncludePreviousCalls>false</IncludePreviousCalls>
+                    					<IncludeOnwardCalls>false</IncludeOnwardCalls>
+                    					<UseRealtimeData>full</UseRealtimeData>
+                    					<IncludeStopHierarchy>all</IncludeStopHierarchy>
+                    				</Params>
+                    			</OJPStopEventRequest>
+                    		</siri:ServiceRequest>
+                    	</OJPRequest>
+                    </OJP>                
               exampleTR1:
                 summary: "TR - Simple"
                 description: "Simple OJPTripRequest Zürich - Schaffhausen"
@@ -206,6 +269,88 @@ paths:
                   		</siri:ServiceRequest>
                   	</OJPRequest>
                   </OJP>
+              exampleTR3:
+                summary: "TR - With lots of parameters"
+                description: "remove parameters to speed things up."
+                value: |                  
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <OJP xmlns="http://www.vdv.de/ojp" xmlns:siri="http://www.siri.org.uk/siri" version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vdv.de/ojp ../../../../OJP4/OJP.xsd">
+                    	<OJPRequest>
+                    		<siri:ServiceRequest>
+                    			<siri:RequestTimestamp>2024-06-01T11:24:34.598Z</siri:RequestTimestamp>
+                    			<siri:RequestorRef>MENTZRegTest</siri:RequestorRef>
+                    			<OJPTripRequest>
+                    				<siri:RequestTimestamp>2024-06-01T11:24:34.598Z</siri:RequestTimestamp>
+                    				<siri:MessageIdentifier>TR-1g</siri:MessageIdentifier>
+                    				<Origin>
+                    					<PlaceRef>
+                    						<siri:StopPointRef>8503016</siri:StopPointRef>
+                    						<Name>
+                    							<Text>Zürich Flughafen</Text>
+                    						</Name>
+                    					</PlaceRef>
+                    					<!-- <DepArrTime>2024-06-01T11:24:34.598Z</DepArrTime> -->
+                    				</Origin>
+                    				<Destination>
+                    					<PlaceRef>
+                    						<siri:StopPointRef>8503424</siri:StopPointRef>
+                    						<Name>
+                    							<Text>Schaffhausen</Text>
+                    						</Name>
+                    					</PlaceRef>
+                    					<!-- <DepArrTime>2024-06-01T11:24:34.598Z</DepArrTime> -->
+                                        				</Destination>
+                    				<NoChangeAt>
+                    					<StopPlaceRef>8506000</StopPlaceRef>
+                    				</NoChangeAt>
+                    				<Params>
+                    					<NoSingleStep>false</NoSingleStep>
+                    					<NoStairs>true</NoStairs>
+                    					<NoEscalator>false</NoEscalator>
+                    					<NoElevator>false</NoElevator>
+                    					<NoRamp>false</NoRamp>
+                    					<NoSight>false</NoSight>
+                    					<NoTravelator>false</NoTravelator>
+                    					<LevelEntrance>true</LevelEntrance>
+                    					<LevelEntranceOrBoardingAid>false</LevelEntranceOrBoardingAid>
+                    					<BikeTransport>false</BikeTransport>
+                    					<WalkSpeed>150</WalkSpeed>
+                    					<HikingProfile>easy</HikingProfile>
+                    					<CyclingProfile>comfortable</CyclingProfile>
+                    					<NumberOfResults>1</NumberOfResults>
+                    					<UseRealtimeData>explanatory</UseRealtimeData>
+                    					<OptimisationMethod>fastest</OptimisationMethod>
+                    					<IncludeAlternativeOptions>true</IncludeAlternativeOptions>
+                    					<IncludeLegProjection>false</IncludeLegProjection>
+                    					<IncludeTurnDescription>false</IncludeTurnDescription>
+                    					<IncludeAccessFeatures>true</IncludeAccessFeatures>
+                    					<IncludeSituationsContext>false</IncludeSituationsContext>
+                    					<IncludeIntermediateStops>false</IncludeIntermediateStops>
+                    					<IncludeOperatingDays>true</IncludeOperatingDays>
+                    				</Params>
+                    			</OJPTripRequest>
+                    		</siri:ServiceRequest>
+                    	</OJPRequest>
+                    </OJP>
+              exampleTIR1:
+                summary: "TIR "
+                description: "You need to copy a valid JourneyRef from the Service of a recently obtained. Operating day also needs to set to a valid day."
+                value: |                  
+                    <?xml version="1.0" encoding="UTF-8"?>
+                                        <OJP version="2.0" xsi:schemaLocation="http://www.vdv.de/ojp OJP_changes_for_v1.1/OJP.xsd" xmlns="http://www.vdv.de/ojp" xmlns:siri="http://www.siri.org.uk/siri" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                                            <OJPRequest>
+                                                <siri:ServiceRequest>
+                                                    <siri:RequestTimestamp>2024-06-01T11:16:59.475Z</siri:RequestTimestamp>
+                                                    <siri:RequestorRef>MENTZRegTest</siri:RequestorRef>
+                                                    <OJPTripInfoRequest>
+                                                        <siri:RequestTimestamp>2024-06-01T11:16:59.475Z</siri:RequestTimestamp>
+                                                        <siri:MessageIdentifier>TIR-1a</siri:MessageIdentifier>
+                                                        <JourneyRef>ojp-91-3-J-j24-1-3107-TA</JourneyRef>
+                                                        <OperatingDayRef>2024-06-10</OperatingDayRef>
+                                                    </OJPTripInfoRequest>
+                                                </siri:ServiceRequest>
+                                            </OJPRequest>
+                                            </OJP>                                            
       responses:
         "400":
           description: "Bad Request"
@@ -265,6 +410,29 @@ paths:
                   description: "Get a correct key and apply it correctly."
                   value:
                     error: Access to this API has been disallowed                  
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              schema: 
+                  type: object
+                  properties:
+                    traceId: 
+                      type: string
+                    error:
+                      type: string
+                    host:
+                      type: string
+                  required:
+                    - error
+              examples:
+                example3:
+                  summary: "Something caused an internal problem"
+                  description: "Some parameter could really not be processed."
+                  value:
+                    traceId: "dfdd"
+                    error: "Object reference not set to an instance of an object."
+                    host: "xyk1-123host.host"
   /ojp2020:
     post:
       summary: "OJP 1.0 acccess"
@@ -280,7 +448,7 @@ paths:
                   name: "OJP"
                   wrapped: true                          
             examples:
-              example1:
+              exampleA:
                 summary: "LIR - Simple"
                 description: "Simple OJPLocationInformationtRequest for Bern"
                 value: |
@@ -304,7 +472,7 @@ paths:
                           </ServiceRequest>
                       </OJPRequest>
                    </OJP>
-              example2:
+              exampleB:
                 summary: "SER - Simple"
                 description: "Simple OJPStopEventRequest for Bern"
                 value: |
