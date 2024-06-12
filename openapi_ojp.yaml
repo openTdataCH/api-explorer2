@@ -29,8 +29,6 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      in: header
-      name: "Authorization"
 security:
   - bearerAuth: []
 paths:
@@ -50,7 +48,7 @@ paths:
                   wrapped: true                          
             examples:
               exampleLIR1:
-                summary: "LIR - Simple by name"
+                summary: "1. Location Information Service - Simple"
                 description: "Simple OJPLocationInformationtRequest for Bern"
                 value: |
                   <?xml version="1.0" encoding="UTF-8"?>
@@ -74,7 +72,7 @@ paths:
                       </OJPRequest>
                   </OJP>
               exampleLIR2:
-                summary: "LIR - Simple by name - topographic place"
+                summary: "2. Location Information Service - topographic place"
                 description: "Simple OJPLocationInformationtRequest for Schaffhausen"
                 value: |
                   <?xml version="1.0" encoding="UTF-8"?>
@@ -98,7 +96,7 @@ paths:
                       </OJPRequest>
                   </OJP>
               exampleLIR4:
-                summary: "LIR - coordinate search rectangle (not working)"
+                summary: "3. Location Information Service - coordinate search rectangle"
                 description: "OJPLocationInformationtRequest with circle coordinates"
                 value: |
                   <?xml version="1.0" encoding="UTF-8"?>
@@ -130,7 +128,7 @@ paths:
                   	</OJPRequest>
                    </OJP>             
               exampleLIR5:
-                summary: "LIR - extended version"
+                summary: "4. Location Information Service - extended version"
                 description: "OJPLocationInformationtRequest extened"
                 value: |                   
                     <?xml version="1.0" encoding="UTF-8"?>
@@ -159,7 +157,7 @@ paths:
                     	</OJPRequest>
                     </OJP>
               exampleSER1:
-                summary: "SER - Simple"
+                summary: "5. Stop Event Service - Simple"
                 description: "Simple OJPStopEventRequest for Bern"
                 value: |
                   <?xml version="1.0" encoding="UTF-8"?>
@@ -195,7 +193,7 @@ paths:
                       </OJPRequest>
                   </OJP>
               exampleSER3:
-                summary: "SER - complex"
+                summary: "6. Stop Event Service - complex"
                 description: "Complex OJPStopEventRequest"
                 value: |
                     <?xml version="1.0" encoding="UTF-8"?>
@@ -229,7 +227,7 @@ paths:
                     	</OJPRequest>
                     </OJP>                
               exampleTR1:
-                summary: "TR - Simple"
+                summary: "7. Trip Service - Simple"
                 description: "Simple OJPTripRequest Zürich - Schaffhausen"
                 value: |
                   <?xml version="1.0" encoding="UTF-8"?>
@@ -270,7 +268,7 @@ paths:
                   	</OJPRequest>
                   </OJP>
               exampleTR3:
-                summary: "TR - With lots of parameters"
+                summary: "8. Trip Service - with lots of parameters"
                 description: "remove parameters to speed things up."
                 value: |                  
                     <?xml version="1.0" encoding="UTF-8"?>
@@ -333,7 +331,7 @@ paths:
                     	</OJPRequest>
                     </OJP>
               exampleTIR1:
-                summary: "TIR "
+                summary: "9. Trip Information Service"
                 description: "You need to copy a valid JourneyRef from the Service of a recently obtained. Operating day also needs to set to a valid day."
                 value: |                  
                     <?xml version="1.0" encoding="UTF-8"?>
@@ -360,7 +358,7 @@ paths:
                   type: object
                   xml:
                     name: "OJP"
-                    wrapped: true   
+                    wrapped: true
               examples:
                 example1:
                   summary: "Not a valid XML"
@@ -391,8 +389,7 @@ paths:
                   summary: "Wrong or no key provided"
                   description: "Get a correct key and apply it correctly."
                   value:
-                    error: Authorization field missing
-
+                    error: "Authorization field missing"
         "403":
           description: "Forbidden"
           content:
@@ -409,7 +406,7 @@ paths:
                   summary: "Wrong or no key provided"
                   description: "Get a correct key and apply it correctly."
                   value:
-                    error: Access to this API has been disallowed                  
+                    error: "Access to this API has been disallowed"
         "500":
           description: "Internal server error"
           content:
@@ -509,3 +506,20 @@ paths:
                       </OJPRequest>
                   </OJP>
       responses:
+        "401":
+          description: "Unauthorized"
+          content:
+            application/json:
+              schema: 
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                  required:
+                    - error
+              examples:
+                exampleAX:
+                  summary: "Wrong or no key provided"
+                  description: "Get a correct key and apply it correctly."
+                  value:
+                    error: Authorization field missing
