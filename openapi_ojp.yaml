@@ -160,7 +160,7 @@ paths:
                 summary: "5. Stop Event Service - Simple"
                 description: "Simple OJPStopEventRequest for Bern"
                 value: |
-                    <?xml version="1.0" encoding="UTF-8"?>
+                  <?xml version="1.0" encoding="UTF-8"?>
                     <OJP xmlns="http://www.vdv.de/ojp" xmlns:siri="http://www.siri.org.uk/siri" version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vdv.de/ojp ../../../../OJP4/OJP.xsd">
                       <OJPRequest>
                           <siri:ServiceRequest>
