@@ -161,37 +161,38 @@ paths:
                 description: "Simple OJPStopEventRequest for Bern"
                 value: |
                   <?xml version="1.0" encoding="UTF-8"?>
-                  <OJP xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.siri.org.uk/siri" version="1.0" xmlns:ojp="http://www.vdv.de/ojp" xsi:schemaLocation="http://www.siri.org.uk/siri ../ojp-xsd-v1.0/OJP.xsd">
-                      <OJPRequest>
-                          <ServiceRequest>
-                              <RequestTimestamp>2024-06-01T11:16:59.475Z</RequestTimestamp>
-                              <RequestorRef>API-Explorer</RequestorRef>
-                              <ojp:OJPStopEventRequest>
-                                  <RequestTimestamp>2024-06-01T11:16:59.475Z</RequestTimestamp>
-                                  <ojp:Location>
-                                      <ojp:PlaceRef>
-                                          <StopPlaceRef>8507000</StopPlaceRef>
-                                          <ojp:LocationName>
-                                              <ojp:Text>Bern</ojp:Text>
-                                          </ojp:LocationName>
-                                      </ojp:PlaceRef>
-                                      <!-- <ojp:DepArrTime>2024-06-01T12:43:50</ojp:DepArrTime> -->
-                                  </ojp:Location>
-                                  <ojp:Params>
-                                      <ojp:OperatorFilter>
-                                          <ojp:Exclude>false</ojp:Exclude>
-                                          <ojp:OperatorRef>11</ojp:OperatorRef>
-                                      </ojp:OperatorFilter>
-                                      <ojp:NumberOfResults>1</ojp:NumberOfResults>
-                                      <ojp:StopEventType>departure</ojp:StopEventType>
-                                      <ojp:IncludePreviousCalls>true</ojp:IncludePreviousCalls>
-                                      <ojp:IncludeOnwardCalls>true</ojp:IncludeOnwardCalls>
-                                      <ojp:IncludeRealtimeData>true</ojp:IncludeRealtimeData>
-                                  </ojp:Params>
-                              </ojp:OJPStopEventRequest>
-                          </ServiceRequest>
-                      </OJPRequest>
-                  </OJP>
+                  <OJP xmlns="http://www.vdv.de/ojp" xmlns:siri="http://www.siri.org.uk/siri" version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vdv.de/ojp ../../../../OJP4/OJP.xsd">
+	                  <OJPRequest>
+		                  <siri:ServiceRequest>
+			                  <siri:RequestTimestamp>2024-06-01T11:24:34.598Z</siri:RequestTimestamp>
+			                  <siri:RequestorRef>MENTZRegTest</siri:RequestorRef>
+			                  <OJPStopEventRequest>
+				                  <siri:RequestTimestamp>2024-06-01T11:24:34.598Z</siri:RequestTimestamp>
+				                  <siri:MessageIdentifier>SER</siri:MessageIdentifier>
+				                  <Location>
+					                <PlaceRef>
+						                <StopPlaceRef>8507000</StopPlaceRef>
+						                <Name>
+							                <Text>Bern</Text>
+						                </Name>
+					                </PlaceRef>
+					                <!-- <DepArrTime>2024-06-01T11:24:34.598Z</DepArrTime> -->
+				                </Location>
+				                <Params>
+					                <OperatorFilter>
+						                <Exclude>false</Exclude>
+						                <OperatorRef>11</OperatorRef>
+					                </OperatorFilter>
+					                <NumberOfResults>5</NumberOfResults>
+					                <StopEventType>departure</StopEventType>
+					                <IncludePreviousCalls>false</IncludePreviousCalls>
+					                <IncludeOnwardCalls>true</IncludeOnwardCalls>
+					                <UseRealtimeData>full</UseRealtimeData>
+				                </Params>
+			                </OJPStopEventRequest>
+		                </siri:ServiceRequest>
+	                </OJPRequest>
+                </OJP>
               exampleSER3:
                 summary: "6. Stop Event Service - complex"
                 description: "Complex OJPStopEventRequest"
