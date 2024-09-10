@@ -160,8 +160,8 @@ paths:
                 summary: "5. Stop Event Service - Simple"
                 description: "Simple OJPStopEventRequest for Bern"
                 value: |
-                  <?xml version="1.0" encoding="UTF-8"?>
-                  <OJP xmlns="http://www.vdv.de/ojp" xmlns:siri="http://www.siri.org.uk/siri" version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vdv.de/ojp ../../../../OJP4/OJP.xsd">
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <OJP xmlns="http://www.vdv.de/ojp" xmlns:siri="http://www.siri.org.uk/siri" version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vdv.de/ojp ../../../../OJP4/OJP.xsd">
                       <OJPRequest>
                           <siri:ServiceRequest>
                               <siri:RequestTimestamp>2024-06-01T11:24:34.598Z</siri:RequestTimestamp>
@@ -192,7 +192,7 @@ paths:
                             </OJPStopEventRequest>
                         </siri:ServiceRequest>
                     </OJPRequest>
-                </OJP>
+                  </OJP>
               exampleSER3:
                 summary: "6. Stop Event Service - complex"
                 description: "Complex OJPStopEventRequest"
