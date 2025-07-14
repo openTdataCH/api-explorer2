@@ -20,7 +20,7 @@ info:
       - OJPTripInfoRequest: TIR
 externalDocs:
   description: "OJP documentation"
-  url: "http://www.normes-donnees-tc.org/wp-content/uploads/2017/01/TC_278_WI_00278420_E-RS-170118-final3.pdf"
+  url: "https://www.oev-info.ch/sites/default/files/2023-05/open_journey_planner_ojp_de_v1.pdf"
 servers:
   - url: "https://api.opentransportdata.swiss"
 components:
